@@ -1,38 +1,59 @@
 import React from "react";
+import { Typography } from "@mui/material";
 import { FaChartPie, FaUsers, FaFileInvoice, FaCheckCircle } from "react-icons/fa";
 import "../css/homepage.css";
+import backImg from "../assets/back.png";
 
 const HomePage = () => {
+  const features = [
+    {
+      icon: <FaUsers size={40} />, 
+      title: "Role-Based Access", 
+      description: "Ensure secure access with employee, manager, and admin roles.", 
+      bgColor: "#E0F2F1", // Light Sea Green
+    },
+    {
+      icon: <FaCheckCircle size={40} />, 
+      title: "Automated Approvals", 
+      description: "Streamline expense approvals with predefined workflows.", 
+      bgColor: "#FFFFFF", // White
+    },
+    {
+      icon: <FaFileInvoice size={40} />, 
+      title: "PDF Reporting", 
+      description: "Generate and download detailed expense reports in PDF format.", 
+      bgColor: "#FFFFFF", // White
+    },
+    {
+      icon: <FaChartPie size={40} />, 
+      title: "Real-Time Analytics", 
+      description: "Gain deep insights into company expenses with visual reports.", 
+      bgColor: "#E0F2F1", // Light Sea Green
+    }
+  ];
+
   return (
     <div className="home-container">
-      <header className="home-header">
-        <h1>Enterprise Expense Management</h1>
-        <p className="subtitle">Track, Manage & Analyze Expenses with Ease</p>
-      </header>
-
+      {/* Background Image Section */}
+      <div style={{
+        background: `url(${backImg}) center/cover no-repeat`,
+        backgroundSize: 'center/contain',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
+        height: '60vh',
+      }}></div>
+      
+      {/* Features Section */}
       <section className="features">
-        <div className="feature-card">
-          <FaUsers className="feature-icon" />
-          <h2>Role-Based Access</h2>
-          <p>Ensure secure access with employee, manager, and admin roles.</p>
-        </div>
-
-        <div className="feature-card">
-          <FaCheckCircle className="feature-icon" />
-          <h2>Automated Approvals</h2>
-          <p>Streamline expense approvals with predefined workflows.</p>
-        </div>
-
-        <div className="feature-card">
-          <FaChartPie className="feature-icon" />
-          <h2>Real-Time Analytics</h2>
-          <p>Gain deep insights into company expenses with visual reports.</p>
-        </div>
-
-        <div className="feature-card">
-          <FaFileInvoice className="feature-icon" />
-          <h2>PDF Reporting</h2>
-          <p>Generate and download detailed expense reports in PDF format.</p>
+        <Typography variant="h2" className="section-title" fontWeight="bold" color="#325a56">Our Services</Typography>
+        <div className="card-container">
+          {features.map((feature, index) => (
+            <div key={index} className="feature-card" style={{ backgroundColor: feature.bgColor }}>
+              <div className="icon-container">{feature.icon}</div>
+              <h2>{feature.title}</h2>
+              <p>{feature.description}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>

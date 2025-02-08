@@ -1,10 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate , useLocation} from "react-router-dom";
 import "../css/header.css";
 import logo from "../assets/logo.png"; // Replace with actual logo path
 
 const Header = () => {
-    const [active, setActive] = useState("home");
+    const [active, setActive] = useState("");
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.pathname === "/") {
+            setActive("home");
+        } else if (location.pathname === "/about") {
+            setActive("about");
+        } else if (location.pathname.startsWith("/auth")) {
+            setActive("login");
+        }
+    }, [location.pathname]);
     const navigate = useNavigate();
 
     const handleNavigation = (path) => {
