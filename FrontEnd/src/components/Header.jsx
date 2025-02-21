@@ -15,6 +15,8 @@ const Header = () => {
             setActive("about");
         } else if (location.pathname.startsWith("/auth")) {
             setActive("login");
+        } else if (location.pathname === "/dashboard") {  
+            setActive("dashboard");
         }
     }, [location.pathname]);
     const navigate = useNavigate();
@@ -45,6 +47,12 @@ const Header = () => {
                     About
                 </button>
                 <button
+                     className={active === "dashboard" ? "active" : ""}
+                         onClick={() => handleNavigation("dashboard")}
+                 >
+                      Dashboard
+                </button>
+                <button
                     className={active === "login" ? "active" : ""}
                     onClick={() => handleNavigation("auth/login")}
                 >
@@ -56,3 +64,4 @@ const Header = () => {
 };
 
 export default Header;
+
