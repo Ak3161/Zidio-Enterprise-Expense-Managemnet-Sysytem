@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate , useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../css/header.css";
 import logo from "../assets/logo.png"; // Replace with actual logo path
 
 const Header = () => {
     const [active, setActive] = useState("");
-
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (location.pathname === "/") {
@@ -15,15 +15,14 @@ const Header = () => {
             setActive("about");
         } else if (location.pathname.startsWith("/auth")) {
             setActive("login");
-        } else if (location.pathname === "/dashboard") {  
+        } else if (location.pathname.startsWith("/dashboard")) {
             setActive("dashboard");
         }
     }, [location.pathname]);
-    const navigate = useNavigate();
 
     const handleNavigation = (path) => {
         setActive(path);
-        navigate(`/${path}`);
+        navigate(path);  // Ensure proper navigation
     };
 
     return (
@@ -36,25 +35,25 @@ const Header = () => {
             <div className="nav-right">
                 <button
                     className={active === "home" ? "active" : ""}
-                    onClick={() => handleNavigation("")}
+                    onClick={() => handleNavigation("/")}
                 >
                     Home
                 </button>
                 <button
                     className={active === "about" ? "active" : ""}
-                    onClick={() => handleNavigation("about")}
+                    onClick={() => handleNavigation("/about")}
                 >
                     About
                 </button>
                 <button
-                     className={active === "dashboard" ? "active" : ""}
-                         onClick={() => handleNavigation("dashboard")}
-                 >
-                      Dashboard
+                    className={active === "dashboard" ? "active" : ""}
+                    onClick={() => handleNavigation("/dashboard")}
+                >
+                    Dashboard
                 </button>
                 <button
                     className={active === "login" ? "active" : ""}
-                    onClick={() => handleNavigation("auth/login")}
+                    onClick={() => handleNavigation("/auth/login")}
                 >
                     Login
                 </button>
@@ -64,4 +63,3 @@ const Header = () => {
 };
 
 export default Header;
-
